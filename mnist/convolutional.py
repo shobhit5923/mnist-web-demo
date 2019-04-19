@@ -8,25 +8,15 @@ data = input_data.read_data_sets("/mnist/MNIST_data", one_hot=True)
 # model
 with tf.variable_scope("convolutional"):
     x = tf.placeholder(tf.float32, [None, 784])
-    #解决过拟合问题
     keep_prob = tf.placeholder(tf.float32)
     y, variables = model.convolutional(x, keep_prob)
 
 # train
 y_ = tf.placeholder(tf.float32, [None, 10])
 cross_entropy = -tf.reduce_sum(y_ * tf.log(y))
-#AdamOptimizer 数据量大，比梯度下降算法要快些
+#AdamOptimizer
 train_step = tf.train.AdamOptimizer(1e-4).minimize(cross_entropy)
-'''
-tf.argmax(input, axis=None, name=None, dimension=None)
-此函数是对矩阵按行或列计算最大值
 
-参数
-input：输入Tensor
-axis：0表示按列，1表示按行
-name：名称
-dimension：和axis功能一样，默认axis取值优先。新加的字段
-'''
 correct_prediction = tf.equal(tf.argmax(y, 1), tf.argmax(y_, 1))
 accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 
