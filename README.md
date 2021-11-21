@@ -13,4 +13,4 @@ Run Flask app
 ```sh
 python main.py
 ```
-You can visit now `localhost:5000/` this address in web browser
+You can visit now `https://mnistdemo.herokuapp.com/` this address in web browser
